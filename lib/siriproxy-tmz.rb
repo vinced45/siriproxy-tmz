@@ -22,7 +22,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	def tmz(news)
 	  Thread.new {
 	    doc = Nokogiri::HTML(open("http://www.tmz.com/rss.xml"))
-      	entry = doc.css("div.entry")
+      	entry = doc.xpath("/html/body/div[2]/div[2]/div")
       	entry.each {
       		|article|
       		title = article.css("h3 a").first.content.strip
