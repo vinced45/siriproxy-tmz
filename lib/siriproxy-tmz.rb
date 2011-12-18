@@ -21,16 +21,19 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	
 	def tmz(news)
 	  Thread.new {
+	  
+	    searched = 0
 	    doc = Nokogiri::HTML(open("http://m.tmz.com/home.ftl"))
       	entry = doc.css("div.main_art")
       	entry.each {
       		|article|
+      		searched = 1
       		title = article.css("span").first.content.strip
       		img = article.css("a img.img_thumb").first
       		img_url = img['src']
-      		descr = article.css("div").first.content.strip
+      		descr = article.css("div").last.content.strip
       		
-      		say title
+      		say "Here is the lastest from TMZ...", spoken: "Here is the lastest from TMZ. " + title +
       		
       		object = SiriAddViews.new
     		object.make_root(last_ref_id)
@@ -40,7 +43,6 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     		object.views << SiriAnswerSnippet.new([answer])
     		send_object object
       		
-      		
       		response = ask "Would you like to hear more stories?" #ask the user for something
     
     		if(response =~ /yes/i) #process their response
@@ -48,11 +50,13 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     		else
       			say "OK, I'll stop with all the juicy TMZ gossip."
       			break
-      			request_completed
+      			##request_completed
     		end
       		
       	} 
-			say "I'm sorry, I didn't see any juicy TMZ gossip. I failed you."
+      		if searched == 0
+				say "I'm sorry, I didn't see any juicy TMZ gossip. I failed you."
+			end
 			request_completed
 	  }
 		
