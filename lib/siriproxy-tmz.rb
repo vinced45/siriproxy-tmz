@@ -22,7 +22,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	def tmz(news)
 	  Thread.new {
 	    doc = Nokogiri::HTML(open("http://www.tmz.com/rss.xml"))
-      	entry = doc.css(".entry")
+      	entry = doc.css("div.entry")
       	entry.each {
       		|article|
       		title = article.css("h3 a").first.content.strip
@@ -38,7 +38,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     		end
       		
       	} 
-			
+			say "I'm sorry, I didn't see any juicy TMZ gossip. I failed you."
 			request_completed
 	  }
 		
