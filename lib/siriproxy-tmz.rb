@@ -35,7 +35,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		img_url = img['src']
       		descr = article.css("div").last.content.strip
       		
-      		say "Here is the lastest from TMZ..."#, spoken: "Here is the lastest from TMZ. " + title +
+      		say "Here is the lastest from TMZ...", spoken: "Here is the lastest from TMZ. " + title + "."
       		
       		object = SiriAddViews.new
     		object.make_root(last_ref_id)
