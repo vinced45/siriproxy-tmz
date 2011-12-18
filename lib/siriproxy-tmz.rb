@@ -10,6 +10,8 @@ require 'nokogiri'
 
 class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 
+	@searched = 0 
+	
 	def initialize(config)
     #if you have custom configuration options, process them here!
     end
@@ -22,12 +24,12 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	def tmz(news)
 	  Thread.new {
 	  
-	    searched = 0
+	    
 	    doc = Nokogiri::HTML(open("http://m.tmz.com/home.ftl"))
       	entry = doc.css("div.main_art")
       	entry.each {
       		|article|
-      		searched = 1
+      		@searched = 1
       		title = article.css("span").first.content.strip
       		img = article.css("a img.img_thumb").first
       		img_url = img['src']
@@ -54,7 +56,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     		end
       		
       	} 
-      		if searched == 0
+      		if @searched == 0
 				say "I'm sorry, I didn't see any juicy TMZ gossip. I failed you."
 			end
 			request_completed
