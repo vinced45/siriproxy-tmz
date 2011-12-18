@@ -47,7 +47,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		
       		response = ask "Would you like to hear more gossip?" #ask the user for something
     
-    		if(response =~ /yes/i) #process their response
+    		if(response == /yes/i) #process their response
       			say "OK, well you will have to wait until the plugin is updated. Stay tuned."
     		else
       			say "OK, I'll stop with all the juicy TMZ gossip."
