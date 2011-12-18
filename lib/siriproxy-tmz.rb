@@ -21,11 +21,14 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	
 	def tmz(news)
 	  Thread.new {
-	    doc = Nokogiri::HTML(open("http://www.tmz.com/rss.xml"))
-      	entry = doc.xpath("/html/body/div[2]/div[2]/div")
+	    doc = Nokogiri::HTML(open("http://m.tmz.com/home.ftl"))
+      	entry = doc.css("div.main_art")
       	entry.each {
       		|article|
-      		title = article.css("h3 a").first.content.strip
+      		title = article.css("span").first.content.strip
+      		img = article.css("a img.img_thumb").first
+      		img_url = img['src']
+      		descr = article.css("div").first.content.strip
       		say title
       		response = ask "Would you like to hear more stories?" #ask the user for something
     
