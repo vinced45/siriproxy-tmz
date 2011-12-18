@@ -26,14 +26,14 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	  
 	    
 	    doc = Nokogiri::HTML(open("http://m.tmz.com/home.ftl"))
-      	entry = doc.css("div.main_art")
-      	entry.each {
-      		|article|
+      	main = doc.css("div.main_art")
+      	##entry.each {
+      		#|article|
       		#@searched = 1
-      		title = article.css("span").first.content.strip
-      		img = article.css("a img.img_thumb").first
+      		title = main.css("span").first.content.strip
+      		img = main.css("a img.img_thumb").first
       		img_url = img['src']
-      		descr = article.css("div").last.content.strip
+      		descr = main.css("div").last.content.strip
       		
       		say "Here is the latest from TMZ...", spoken: "Here is the latest from TMZ. " + title + "."
       		
@@ -48,10 +48,10 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		response = ask "Would you like to hear more gossip?" #ask the user for something
     
     		if(response =~ /yes/i) #process their response
-      			say "OK"
+      			say "OK, well you will have to wait until the plugin is updated. Stay tuned."
     		else
       			say "OK, I'll stop with all the juicy TMZ gossip."
-      			break
+      			##break
       			##request_completed
     		end
       		
