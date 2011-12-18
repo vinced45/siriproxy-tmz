@@ -29,7 +29,18 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		img = article.css("a img.img_thumb").first
       		img_url = img['src']
       		descr = article.css("div").first.content.strip
+      		
       		say title
+      		
+      		object = SiriAddViews.new
+    		object.make_root(last_ref_id)
+    		answer = SiriAnswer.new(title, [
+      		SiriAnswerLine.new('logo',img_url), # this just makes things looks nice, but is obviously specific to my username
+      		SiriAnswerLine.new(descr)])
+    		object.views << SiriAnswerSnippet.new([answer])
+    		send_object object
+      		
+      		
       		response = ask "Would you like to hear more stories?" #ask the user for something
     
     		if(response =~ /yes/i) #process their response
