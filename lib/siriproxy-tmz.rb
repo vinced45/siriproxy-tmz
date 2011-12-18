@@ -55,7 +55,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       			##request_completed
     		end
       		
-      	} 
+      	#} 
       		#if @searched == 0
 				#say "I'm sorry, I didn't see any juicy TMZ gossip. I failed you."
 			#end
