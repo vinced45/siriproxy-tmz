@@ -35,7 +35,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		img_url = img['src']
       		descr = article.css("div").last.content.strip
       		
-      		say "Here is the lastest from TMZ...", spoken: "Here is the lastest from TMZ. " + title + "."
+      		say "Here is the latest from TMZ...", spoken: "Here is the latest from TMZ. " + title + "."
       		
       		object = SiriAddViews.new
     		object.make_root(last_ref_id)
@@ -45,7 +45,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     		object.views << SiriAnswerSnippet.new([answer])
     		send_object object
       		
-      		response = ask "Would you like to hear more stories?" #ask the user for something
+      		response = ask "Would you like to hear more gossip?" #ask the user for something
     
     		if(response =~ /yes/i) #process their response
       			say "OK"
