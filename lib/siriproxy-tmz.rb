@@ -90,6 +90,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     	response = ask "Would you like to hear more gossip?" #ask the user for something
     
     	if(response =~ /yes/i)- #process their response
+    	   say "OK, looking for more gossip..."
       		#@searched = @searched + 1
       		#showArticle(@searched)
     	else
