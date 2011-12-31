@@ -11,7 +11,7 @@ require 'nokogiri'
 class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 
 	@searched = 0 
-	@articles = []
+	@entry = []
 	
 	def initialize(config)
     #if you have custom configuration options, process them here!
@@ -23,61 +23,52 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	end
 	
 	def tmz(news)
-	  Thread.new {
 	  
-	    doc = Nokogiri::HTML(open("http://www.tmz.com"))
-      	entry = doc.css(".post")
+	  	say "Checking to see if there is any gossip today..."
+	  
+		doc = Nokogiri::HTML(open("http://www.tmz.com"))
+      	@entry = doc.css(".post")
       	
-      	i = 0
-      	
-      	entry.each {
-      		|article|
-      		#@searched = 1
-      		title = article.css("a span").first.content.strip
-      		
-      		if title.nil?
-      			break
-      		end
-      		img = article.css("p img").first
-      		if img.nil?
-      			break
-      		end
-      		img_url = img['src']
-      		descr = article.css(".home-post-text").first.content.strip
-      		if descr.nil?
-      			break
-      		end
-      		
-      		showArticle(title,img_url,descr)
-      		#articles[i] = [title,img_url,descr]
-      		#say title
-      		#puts "[Info - TMZ] "+ articles[i] + ""
-      		i = i + 1
-      	}
-      		 
-      	if i == 0
-			say "I'm sorry, I didn't see any juicy TMZ gossip. I failed you."
+      	if @entry.nil?
+      		say "I'm sorry, I didn't see any juicy TMZ gossip. I failed you."
 			request_completed
-		else
-			#showArticle(0)
 		end
 		
-		request_completed
+		showEntry(@searched)
+      	
+      	request_completed
+ 
+	end
+	
+	def showEntry(i)
+	
+		article = entry[i]
 		
-	  }
-		
-	  say "Checking to see if there is any gossip today..."
-	  
+		title = article.css("a span").first.content.strip
+      		
+      	if title.nil?
+      		break
+      	end
+      	
+      	img = article.css("p img").first
+      	
+      	if img.nil?
+      		break
+      	end
+      	
+      	img_url = img['src']
+      	
+      	descr = article.css(".home-post-text").first.content.strip
+      		
+      	if descr.nil?
+      		break
+      	end
+      		
+      	showArticle(title,img_url,descr)
+	
 	end
 	
 	def showArticle(title1, img, desc)
-		
-		#array = []
-		#array = @articles[art]
-		
-		#title1 = array[0]
-		#img = array[1]
-		#descr = array[2]
 		
 		say "Here is the latest from TMZ...", spoken: "Here is the latest from TMZ. " + title1 + "."
 		
@@ -89,17 +80,16 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     	object.views << SiriAnswerSnippet.new([answer])
     	send_object object
     	
-    	#response = ask "Would you like to hear more gossip?" #ask the user for something
+    	@searched = @searched + 1
+    	
+    	response = ask "Would you like to hear more gossip?" #ask the user for something
     
-    	#if(response =~ /yes/i) #process their response
-    	  # say "OK, looking for more gossip..."
-      		#@searched = @searched + 1
-      		#showArticle(@searched)
-    	#else
-      	#	say "OK, I'll stop with all the juicy TMZ gossip."
-      			#break
-      	#	request_completed
-    	#end
+    	if(response =~ /yes/i) #process their response
+    	   	say "OK, looking for more gossip..."
+      		showEntry(@searched)	
+    	else
+      		say "OK, I'll stop with all the juicy TMZ gossip."
+    	end
 	
 	end
 	
