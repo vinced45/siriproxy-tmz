@@ -11,7 +11,7 @@ require 'nokogiri'
 class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 
 	@i = 0 
-	@entry = []
+	@entry = Array.new
 	
 	def initialize(config)
     #if you have custom configuration options, process them here!
@@ -57,7 +57,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       			descr = ""
       		end
       		
-      		@entry << [title,img_url,descr]
+      		@entry.push [title,img_url,descr]
       		#@i = @i + 1
       		#puts @entry
       		#showArticle(title,img_url,descr)
