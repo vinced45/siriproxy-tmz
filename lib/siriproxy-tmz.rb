@@ -34,7 +34,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 			request_completed
 		end
 		
-		showEntry(@searched)
+		showEntry("yes")
       	
       	request_completed
  
@@ -42,7 +42,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	
 	def showEntry(i)
 	
-		article = entry[i]
+		article = entry[@searched]
 		
 		title = article.css("a span").first.content.strip
       		
