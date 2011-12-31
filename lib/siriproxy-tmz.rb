@@ -11,7 +11,7 @@ require 'nokogiri'
 class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 
 	@i = 0 
-	@entry = Array.new
+	#@entry = Array.new
 	
 	def initialize(config)
     #if you have custom configuration options, process them here!
@@ -57,9 +57,6 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       			descr = " "
       		end
       		
-      		#@entry.push [title,img_url,descr]
-      		#@i = @i + 1
-      		#puts @entry
       		showArticle(title,img_url,descr)
       		
       		if @i == 1
@@ -71,12 +68,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       	if entry.nil?
       		say "Sorry there is no gossip on TMZ. I have failed you."
       	else
-      		#arr = []
-      		#arr = @entry[0]
-      		#title = arr[0]
-      		#img_url = arr[1]
-      		#descr = arr[2]
-      		#showArticle(title,img_url,descr)
+
       	end
       	
       	request_completed
@@ -97,10 +89,10 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     	
     	#@searched = @searched + 1
     	
-    	response = ask "Would you like to hear more gossip? You can \"Hear more\" or go to the \"Next Story\" or \"Cancel\"" #ask the user for something
+    	response = ask "Would you like to hear more gossip? You can \"Hear more\", go to the \"Next Story\" or \"Cancel\"" #ask the user for something
     
     	if(response =~ /hear|here more/i) #process their response
-    	   	say " ", spoken: desc
+    	   	say "Detail from the story...", spoken: desc
     	   	response1 = ask "Would you like to hear more gossip? You can go to the \"Next Story\" or \"Cancel\""
       		#showEntry(@searched)
       		if(response1 =~ /next|nick story|door/i)
