@@ -46,7 +46,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		img = article.css("p img").first
       	
       		if img.nil?
-      		
+      			img_url = "http://tecdiary.com/blog/wp-content/uploads/2011/03/tmz.jpg"
       		else
       			img_url = img['src']
       		end
