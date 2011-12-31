@@ -49,7 +49,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		end
       		articles[i] = [title,img_url,descr]
       		#say title
-      		#puts "[Info - TMZ] article: #{title}"
+      		puts "[Info - TMZ] "+ articles[i] + ""
       		i = i + 1
       	}
       		 
