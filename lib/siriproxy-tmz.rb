@@ -46,6 +46,8 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 			request_completed
 		else
 			showArticle(0)
+		end
+		
 	  }
 		
 	  say "Checking to see if there is any gossip today..."
