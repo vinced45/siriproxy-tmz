@@ -100,7 +100,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     	response = ask "Would you like to hear more gossip? You can \"Hear more\" or go to the \"Next Story\" or \"Cancel\"" #ask the user for something
     
     	if(response =~ /hear|here more/i) #process their response
-    	   	say " ", , spoken: desc
+    	   	say " ", spoken: desc
     	   	response1 = ask "Would you like to hear more gossip? You can go to the \"Next Story\" or \"Cancel\""
       		#showEntry(@searched)
       		if(response1 =~ /next|nick story|door/i)
