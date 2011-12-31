@@ -10,7 +10,7 @@ require 'nokogiri'
 
 class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 
-	#@searched = 0 
+	@i = 0 
 	@entry = []
 	
 	def initialize(config)
@@ -57,10 +57,22 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       			descr = ""
       		end
       		
-      		@entry = [title,img_url,descr]
-      		puts @entry
+      		@entry[@i] = [title,img_url,descr]
+      		@i = @i + 1
+      		#puts @entry
       		#showArticle(title,img_url,descr)
       	
+      	end
+      	
+      	if @entry.nil?
+      		say "Sorry there is no gossip on TMZ. I have failed you."
+      	else
+      		arr = []
+      		arr = @entry[0]
+      		title = arr[0]
+      		img_url = arr[1]
+      		descr = arr[2]
+      		showArticle(title,img_url,descr)
       	end
       	
       	request_completed
