@@ -64,7 +64,8 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		
       		if @i == 1
       			break
-      	
+      		end
+      		
       	end
       	
       	if @entry.nil?
