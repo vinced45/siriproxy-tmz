@@ -25,7 +25,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	def tmz(news)
 	  Thread.new {
 	  
-	    doc = Nokogiri::HTML(open("http://www.tmz.com/"))
+	    doc = Nokogiri::HTML(open("http://www.tmz.com"))
       	entry = doc.css(".post")
       	
       	i = 0
@@ -54,7 +54,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		 
       	if i == 0
 			say "I'm sorry, I didn't see any juicy TMZ gossip. I failed you."
-			request_completed
+			#request_completed
 		else
 			showArticle(0)
 		end
