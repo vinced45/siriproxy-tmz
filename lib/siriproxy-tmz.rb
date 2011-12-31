@@ -57,8 +57,8 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       			descr = ""
       		end
       		
-      		@entry[@i] = [title,img_url,descr]
-      		@i = @i + 1
+      		@entry << [title,img_url,descr]
+      		#@i = @i + 1
       		#puts @entry
       		#showArticle(title,img_url,descr)
       	
