@@ -57,22 +57,22 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       			descr = " "
       		end
       		
-      		@entry.push [title,img_url,descr]
+      		#@entry.push [title,img_url,descr]
       		#@i = @i + 1
       		#puts @entry
-      		#showArticle(title,img_url,descr)
+      		showArticle(title,img_url,descr)
       	
       	end
       	
       	if @entry.nil?
       		say "Sorry there is no gossip on TMZ. I have failed you."
       	else
-      		arr = []
-      		arr = @entry[0]
-      		title = arr[0]
-      		img_url = arr[1]
-      		descr = arr[2]
-      		showArticle(title,img_url,descr)
+      		#arr = []
+      		#arr = @entry[0]
+      		#title = arr[0]
+      		#img_url = arr[1]
+      		#descr = arr[2]
+      		#showArticle(title,img_url,descr)
       	end
       	
       	request_completed
