@@ -62,6 +62,8 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 			#showArticle(0)
 		end
 		
+		request_completed
+		
 	  }
 		
 	  say "Checking to see if there is any gossip today..."
@@ -87,17 +89,17 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     	object.views << SiriAnswerSnippet.new([answer])
     	send_object object
     	
-    	response = ask "Would you like to hear more gossip?" #ask the user for something
+    	#response = ask "Would you like to hear more gossip?" #ask the user for something
     
-    	if(response =~ /yes/i) #process their response
-    	   say "OK, looking for more gossip..."
+    	#if(response =~ /yes/i) #process their response
+    	  # say "OK, looking for more gossip..."
       		#@searched = @searched + 1
       		#showArticle(@searched)
-    	else
-      		say "OK, I'll stop with all the juicy TMZ gossip."
+    	#else
+      	#	say "OK, I'll stop with all the juicy TMZ gossip."
       			#break
-      		request_completed
-    	end
+      	#	request_completed
+    	#end
 	
 	end
 	
