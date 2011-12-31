@@ -47,8 +47,8 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		if descr.nil?
       			break
       		end
-      		#articles[i] = [title,img_url,descr]
-      		say title
+      		articles[i] = [title,img_url,descr]
+      		#say title
       		#puts "[Info - TMZ] article: #{title}"
       		i = i + 1
       	}
@@ -68,7 +68,8 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	
 	def showArticle(art)
 		
-		array[] = @articles[art]
+		array = []
+		array = @articles[art]
 		
 		title = array[0]
 		img_url = array[1]
