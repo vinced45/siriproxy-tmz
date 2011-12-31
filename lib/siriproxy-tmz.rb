@@ -33,10 +33,20 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       	entry.each {
       		|article|
       		#@searched = 1
-      		title = main.css("a span").first.content.strip
-      		img = main.css("p img").first
+      		title = article.css("a span").first.content.strip
+      		
+      		if title.nil?
+      			break
+      		end
+      		img = article.css("p img").first
+      		if img.nil?
+      			break
+      		end
       		img_url = img['src']
-      		descr = entry.css(".home-post-text").first.content.strip
+      		descr = article.css(".home-post-text").first.content.strip
+      		if descr.nil?
+      			break
+      		end
       		articles[i] = [title,img_url,descr]
       		i = i + 1
       	}
