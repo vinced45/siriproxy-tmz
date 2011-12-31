@@ -11,7 +11,7 @@ require 'nokogiri'
 class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 
 	@searched = 0 
-	@entry = []
+	#@entry = []
 	
 	def initialize(config)
     #if you have custom configuration options, process them here!
@@ -27,45 +27,41 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	  	say "Checking to see if there is any gossip today..."
 	  
 		doc = Nokogiri::HTML(open("http://www.tmz.com"))
-      	@entry = doc.css(".post")
+      	entry = doc.css(".post")
       	
-      	if @entry.nil?
+      	if entry.nil?
       		say "I'm sorry, I didn't see any juicy TMZ gossip. I failed you."
 			request_completed
 		end
 		
-		showEntry("yes")
+		entry.each do |article|
+		
+			title = article.css("a span").first.content.strip
+      		
+      		if title.nil?
+      			title = ''
+      		end
+      	
+      		img = article.css("p img").first
+      	
+      		if img.nil?
+      		
+      		else
+      			img_url = img['src']
+      		end
+      	
+      		descr = article.css(".home-post-text").first.content.strip
+      		
+      		if descr.nil?
+      			descr = ""
+      		end
+      		
+      		showArticle(title,img_url,descr)
+      	
+      	end
       	
       	request_completed
  
-	end
-	
-	def showEntry(i)
-	
-		article = @entry[@searched]
-		
-		title = article.css("a span").first.content.strip
-      		
-      	if title.nil?
-      		title = ''
-      	end
-      	
-      	img = article.css("p img").first
-      	
-      	if img.nil?
-      		
-      	else
-      		img_url = img['src']
-      	end
-      	
-      	descr = article.css(".home-post-text").first.content.strip
-      		
-      	if descr.nil?
-      		descr = ""
-      	end
-      		
-      	showArticle(title,img_url,descr)
-	
 	end
 	
 	def showArticle(title1, img, desc)
@@ -86,7 +82,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     
     	if(response =~ /yes/i) #process their response
     	   	say "OK, looking for more gossip..."
-      		showEntry(@searched)	
+      		#showEntry(@searched)	
     	else
       		say "OK, I'll stop with all the juicy TMZ gossip."
     	end
