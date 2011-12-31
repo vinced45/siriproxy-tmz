@@ -42,7 +42,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	
 	def showEntry(i)
 	
-		article = entry[@searched]
+		article = @entry[@searched]
 		
 		title = article.css("a span").first.content.strip
       		
