@@ -40,7 +40,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 			title = article.css("a span").first.content.strip
       		
       		if title.nil?
-      			title = ''
+      			title = " "
       		end
       	
       		img = article.css("p img").first
@@ -54,7 +54,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		descr = article.css(".home-post-text").first.content.strip
       		
       		if descr.nil?
-      			descr = ""
+      			descr = " "
       		end
       		
       		@entry.push [title,img_url,descr]
