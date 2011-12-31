@@ -48,7 +48,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       			break
       		end
       		
-      		showArticles(title,img_url,descr)
+      		showArticle(title,img_url,descr)
       		#articles[i] = [title,img_url,descr]
       		#say title
       		#puts "[Info - TMZ] "+ articles[i] + ""
@@ -59,7 +59,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 			say "I'm sorry, I didn't see any juicy TMZ gossip. I failed you."
 			#request_completed
 		else
-			showArticle(0)
+			#showArticle(0)
 		end
 		
 	  }
