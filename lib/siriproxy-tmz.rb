@@ -47,21 +47,21 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 		title = article.css("a span").first.content.strip
       		
       	if title.nil?
-      		break
+      		title = ''
       	end
       	
       	img = article.css("p img").first
       	
       	if img.nil?
-      		break
+      		
+      	else
+      		img_url = img['src']
       	end
-      	
-      	img_url = img['src']
       	
       	descr = article.css(".home-post-text").first.content.strip
       		
       	if descr.nil?
-      		break
+      		descr = ""
       	end
       		
       	showArticle(title,img_url,descr)
