@@ -10,8 +10,8 @@ require 'nokogiri'
 
 class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 
-	@searched = 0 
-	#@entry = []
+	#@searched = 0 
+	@entry = []
 	
 	def initialize(config)
     #if you have custom configuration options, process them here!
@@ -34,7 +34,8 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 			request_completed
 		end
 		
-		entry.each do |article|
+		entry.each do 
+		|article|
 		
 			title = article.css("a span").first.content.strip
       		
@@ -56,7 +57,9 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       			descr = ""
       		end
       		
-      		showArticle(title,img_url,descr)
+      		@entry = [title,img_url,descr]
+      		puts @entry
+      		#showArticle(title,img_url,descr)
       	
       	end
       	
@@ -76,7 +79,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     	object.views << SiriAnswerSnippet.new([answer])
     	send_object object
     	
-    	@searched = @searched + 1
+    	#@searched = @searched + 1
     	
     	response = ask "Would you like to hear more gossip?" #ask the user for something
     
