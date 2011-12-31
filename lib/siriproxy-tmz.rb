@@ -47,8 +47,9 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		if descr.nil?
       			break
       		end
-      		articles[i] = [title,img_url,descr]
-      		puts "[Info - TMZ] article: #{title}"
+      		#articles[i] = [title,img_url,descr]
+      		say title
+      		#puts "[Info - TMZ] article: #{title}"
       		i = i + 1
       	}
       		 
