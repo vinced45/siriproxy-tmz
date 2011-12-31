@@ -68,7 +68,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		
       	end
       	
-      	if @entry.nil?
+      	if entry.nil?
       		say "Sorry there is no gossip on TMZ. I have failed you."
       	else
       		#arr = []
@@ -100,10 +100,10 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     	response = ask "Would you like to hear more gossip? You can \"Hear more\" or go to the \"Next Story\" or \"Cancel\"" #ask the user for something
     
     	if(response =~ /hear|here more/i) #process their response
-    	   	say desc
+    	   	say " ", , spoken: desc
     	   	response1 = ask "Would you like to hear more gossip? You can go to the \"Next Story\" or \"Cancel\""
       		#showEntry(@searched)
-      		if(response1 =~ /next story/i)
+      		if(response1 =~ /next|nick story|door/i)
       			say "OK, looking for more gossip..."
       			@i = 0
       		else
@@ -112,7 +112,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       			#break
       			#request_completed
       		end
-    	elsif (response =~ /next story/i)
+    	elsif (response =~ /next|nick story|door/i)
       		say "OK, looking for more gossip..."
       		@i = 0
       	else
