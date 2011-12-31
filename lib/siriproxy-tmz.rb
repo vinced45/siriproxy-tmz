@@ -47,9 +47,11 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		if descr.nil?
       			break
       		end
-      		articles[i] = [title,img_url,descr]
+      		
+      		showArticles(title,img_url,descr)
+      		#articles[i] = [title,img_url,descr]
       		#say title
-      		puts "[Info - TMZ] "+ articles[i] + ""
+      		#puts "[Info - TMZ] "+ articles[i] + ""
       		i = i + 1
       	}
       		 
@@ -66,22 +68,22 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
 	  
 	end
 	
-	def showArticle(art)
+	def showArticle(title1, img, desc)
 		
-		array = []
-		array = @articles[art]
+		#array = []
+		#array = @articles[art]
 		
-		title = array[0]
-		img_url = array[1]
-		descr = array[2]
+		#title1 = array[0]
+		#img = array[1]
+		#descr = array[2]
 		
-		say "Here is the latest from TMZ...", spoken: "Here is the latest from TMZ. " + title + "."
+		say "Here is the latest from TMZ...", spoken: "Here is the latest from TMZ. " + title1 + "."
 		
 		object = SiriAddViews.new
     	object.make_root(last_ref_id)
-    	answer = SiriAnswer.new(title, [
-      	SiriAnswerLine.new('logo',img_url), # this just makes things looks nice, but is obviously specific to my username
-      	SiriAnswerLine.new(descr)])
+    	answer = SiriAnswer.new(title1, [
+      	SiriAnswerLine.new('logo',img), # this just makes things looks nice, but is obviously specific to my username
+      	SiriAnswerLine.new(desc)])
     	object.views << SiriAnswerSnippet.new([answer])
     	send_object object
     	
