@@ -57,7 +57,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		 
       	if i == 0
 			say "I'm sorry, I didn't see any juicy TMZ gossip. I failed you."
-			#request_completed
+			request_completed
 		else
 			#showArticle(0)
 		end
@@ -89,7 +89,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     	
     	response = ask "Would you like to hear more gossip?" #ask the user for something
     
-    	if(response =~ /yes/i)- #process their response
+    	if(response =~ /yes/i) #process their response
     	   say "OK, looking for more gossip..."
       		#@searched = @searched + 1
       		#showArticle(@searched)
