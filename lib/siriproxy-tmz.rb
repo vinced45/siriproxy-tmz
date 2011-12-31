@@ -61,6 +61,9 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		#@i = @i + 1
       		#puts @entry
       		showArticle(title,img_url,descr)
+      		
+      		if @i == 1
+      			break
       	
       	end
       	
@@ -101,17 +104,21 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       		#showEntry(@searched)
       		if(response1 =~ /next story/i)
       			say "OK, looking for more gossip..."
+      			@i = 0
       		else
       			say "OK, I'll stop with all the juicy TMZ gossip."
-      			break
-      			request_completed
+      			@i = 1
+      			#break
+      			#request_completed
       		end
     	elsif (response =~ /next story/i)
       		say "OK, looking for more gossip..."
+      		@i = 0
       	else
       		say "OK, I'll stop with all the juicy TMZ gossip."
-      		break
-      		request_completed
+      		@i = 1
+      		#break
+      		#request_completed
     	end
 	
 	end
