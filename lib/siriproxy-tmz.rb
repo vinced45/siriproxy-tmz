@@ -48,6 +48,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       			break
       		end
       		articles[i] = [title,img_url,descr]
+      		puts articles[i]
       		i = i + 1
       	}
       		 
