@@ -95,7 +95,7 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
     	
     	response = ask "Would you like to hear more gossip? You can \"Hear more\" or go to the \"Next Story\" or \"Cancel\"" #ask the user for something
     
-    	if(response =~ /hear more/i) #process their response
+    	if(response =~ /hear|here more/i) #process their response
     	   	say desc
     	   	response1 = ask "Would you like to hear more gossip? You can go to the \"Next Story\" or \"Cancel\""
       		#showEntry(@searched)
@@ -103,14 +103,14 @@ class SiriProxy::Plugin::TMZ < SiriProxy::Plugin
       			say "OK, looking for more gossip..."
       		else
       			say "OK, I'll stop with all the juicy TMZ gossip."
-      			#break
+      			break
       			request_completed
       		end
     	elsif (response =~ /next story/i)
       		say "OK, looking for more gossip..."
       	else
       		say "OK, I'll stop with all the juicy TMZ gossip."
-      		#break
+      		break
       		request_completed
     	end
 	
